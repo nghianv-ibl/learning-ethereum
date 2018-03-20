@@ -47,6 +47,8 @@ class Sync {
 				this.filter.watch((error, result) => {
 					console.log(result);
 				});
+			} else {
+				this.logger.error('Fullnode is not alive, restart fullnode and then restart core parser');
 			}
 
 			/* Check Fullnode Alive */
