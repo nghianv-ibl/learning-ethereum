@@ -7,16 +7,54 @@ class BlockRepository {
 		this.Block = this.mongooseInstance.model('Block', BlockSchema);
 	}
 
-	save(block) {
-		this.Block.save(block);
+	insertBlock(blockData) {
+		return new Promise((resolve, reject) => {
+			this.Block.create(blockData, (error, block) => {
+				if (error)
+					reject(error);
+				resolve(block);
+			});
+		});
 	}
 
-	findByNumber(blockNumber) {
-		return this.Block.find({ number: blockNumber });
+	findByNumber(number) {
+		return new Promise((resolve, reject) => {
+			this.Block.findOne({ number: number }, (error, block) => {
+				if (error)
+					reject(error);
+				resolve(block);
+			});
+		});
 	}
 
-	findByHash(blockHash) {
-		return this.Block.find({ hash: blockHash });
+	findByHash(hash) {
+		return new Promise((resolve, reject) => {
+			this.Block.findOne({ hash: hash }, (error, block) => {
+				if (error)
+					reject(error);
+				resolve(block);
+			});
+		});
+	}
+
+	removeBlockByNumber(number) {
+		return new Promise((resolve, reject) => {
+			this.Block.remove({ number: number }, (error, block) => {
+				if (error)
+					reject(error);
+				resolve(block);
+			});
+		});
+	}
+
+	removeBlockByHash(hash) {
+		return new Promise((resolve, reject) => {
+			this.Block.remove({ hash: hash }, (error, block) => {
+				if (error)
+					reject(error);
+				resolve(block);
+			});
+		});
 	}
 }
 

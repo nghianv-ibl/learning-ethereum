@@ -1,5 +1,4 @@
-const TransactionRepository = require('./transactionRepository'),
-	notify = global.notify;
+const TransactionRepository = require('./transactionRepository');
 
 class Transaction {
 
@@ -8,7 +7,13 @@ class Transaction {
 	}
 
 	watch() {
+		global.notify.watchTransaction(transaction => {
+			this.processTransaction(transaction);
+		});
+	}
 
+	processTransaction(transaction) {
+		console.log(transaction);
 	}
 }
 

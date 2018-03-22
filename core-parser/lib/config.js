@@ -26,8 +26,8 @@ class Config {
 	getProviderConfig() {
 		return {
 			FULL_NODE: process.env.FULL_NODE || 'http://localhost:8545',
-			WEB3_FILTER: process.env.WEB3_FILTER || 'latest',
-			REFRESH_FILTER: process.env.REFRESH_FILTER || 5000
+			FULL_NODE_CHECK: process.env.FULL_NODE_CHECK || 10000,
+			WEB3_FILTER: process.env.WEB3_FILTER || 'latest'
 		};
 	}
 

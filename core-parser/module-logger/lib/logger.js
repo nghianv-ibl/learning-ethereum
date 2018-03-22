@@ -3,8 +3,12 @@ const winston = require('winston');
 class Logger {
 
 	constructor(loggerConfig) {
+
 		this.loggerConfig = loggerConfig;
-		const transports = [new (winston.transports.Console)()];
+
+		const transports = [new (winston.transports.Console)({
+			colorize: true
+		})];
 
 		if (this.loggerConfig.enable) {
 			/* Info Log */
@@ -23,7 +27,7 @@ class Logger {
 					level: 'error'
 				})
 			);
-
+			/* Warn Log */
 			transports.push(
 				new (winston.transports.File)({
 					name: 'warn-file',
@@ -37,30 +41,6 @@ class Logger {
 			transports: transports
 		});
 
-		// this.logger = new (winston.Logger)({
-		// 	transports: [
-		// 		/* Console Log */
-		// 		new (winston.transports.Console)(),
-		// 		/* Info Log */
-		// 		new (winston.transports.File)({
-		// 			name: 'info-file',
-		// 			filename: config.getLoggerConfig.infoPath + '/' + 'filelog-info.log',
-		// 			level: 'info'
-		// 		}),
-		// 		/* Error Log */
-		// 		new (winston.transports.File)({
-		// 			name: 'error-file',
-		// 			filename: config.getLoggerConfig.errorPath + '/' + 'filelog-error.log',
-		// 			level: 'error'
-		// 		}),
-		// 		/* Warning Log */
-		// 		new (winston.transports.File)({
-		// 			name: 'error-file',
-		// 			filename: config.getLoggerConfig.warnPath + '/' + 'filelog-error.log',
-		// 			level: 'warn'
-		// 		})
-		// 	]
-		// });
 	}
 
 	info(message) {
